@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<!-- 配置bean对象 class:bean的全类名，通过反射的方式在IOC容器中创建Bean的对象，所以要求Bean中必须要有无参构造器 
+		id：标识容器中的bean，id值唯一 -->
+	<bean id="helloWorld" class="com.zc.cris.HelloWorld">
+		<property name="name" value="cris"></property>
+	</bean>
+
+	<!-- 通过构造器的方法为bean注入属性值 -->
+	<bean id="car1" class="com.zc.cris.Car">
+		<constructor-arg value="法拉利" index="0"></constructor-arg>
+		<constructor-arg value="意大利" index="1"></constructor-arg>
+		<constructor-arg value="2000000.0" type="java.lang.Double"></constructor-arg>
+	</bean>
+	
+	<!-- 使用构造器注入属性值可以指定参数的位置和类型，以区分重载的构造器 -->
+	<bean id="car2" class="com.zc.cris.Car">
+		<constructor-arg value="宝马" type="java.lang.String"></constructor-arg>
+		<!-- 如果字面值包括特殊字符可以使用<![CDATA[]] 进行包裹 -->
+		<!-- 属性值也可以使用value子节点进行配置 -->
+		<constructor-arg type="java.lang.String">
+			<value><![CDATA[<北京*>]]></value>
+		</constructor-arg>
+		<constructor-arg type="java.lang.Integer">
+			<value>255</value>
+		</constructor-arg>
+	</bean>
+	
+	
+	<bean id="person" class="com.zc.cris.Person">
+		<property name="name" value="jack"></property>
+		<property name="age">
+			<value>23</value>
+		</property>
+		
+		<!-- 可以使用property的 ref 属性建立bean之间的引用 
+		<property name="car" ref="car2"></property>
+		-->
+		<!-- <property name="car">
+			<ref bean="car2"/>
+		</property> -->
+		
+		<!-- 内部bean，不能被外部其他bean引用，只能在当前bean内部使用 
+		<property name="car">
+			<bean class="com.zc.cris.Car">
+				<constructor-arg value="奔驰" index="0"></constructor-arg>
+				<constructor-arg value="德国" index="1"></constructor-arg>
+				<constructor-arg value="234544.0" type="java.lang.Double"></constructor-arg>
+			</bean>
+		</property>
+		-->
+		
+		<!-- 为级联属性赋值:属性必须先初始化后才能为级联属性赋值，否则异常，和struts2不同 -->
+		<property name="car" ref="car1"></property>
+		<property name="car.maxSpeed" value="210"></property>
+	</bean>
+	
+		<bean id="person2" class="com.zc.cris.collectionProperty.Person">
+			<property name="name" value="cirs"></property>
+			<property name="age" value="24"></property>
+			<property name="cars">
+				<list>
+					<ref bean="car1" />
+					<ref bean="car2" />
+					<bean class="com.zc.cris.Car">
+						<constructor-arg value="奔驰" index="0"></constructor-arg>
+						<constructor-arg value="德国" index="1"></constructor-arg>
+						<constructor-arg value="234544.0" type="java.lang.Double"></constructor-arg>
+					</bean>
+				</list>
+			</property>
+		</bean>
+	
+	<bean id="person3" class="com.zc.cris.collectionProperty.Person2">
+		<property name="name" value="james"></property>
+		<property name="age" value="34"></property>
+		<property name="cars">
+			<map>
+				<entry key="AA" value-ref="car1"></entry>
+				<entry key="BB" value-ref="car2"></entry>
+			</map>
+		</property>
+	</bean>
+	
+	<!-- 配置properties属性 -->
+	<bean name="dataSource" class="com.zc.cris.collectionProperty.DataSource">
+		<property name="properties">
+			<!-- 使用props和prop子节点来为properties属性值赋值 -->
+			<props>
+				<prop key="user">root</prop>
+				<prop key="password">123456</prop>
+				<prop key="jdbcUrl">jdbc:mysql:///test</prop>
+				<prop key="driverClass">com.mysql.jdbc.Driver</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
+	<!-- 配置单例的集合bean，以供多个bean进行引用，需要导入util 命名空间 -->
+	<util:list id="cars">
+		<ref bean="car1"/>
+		<ref bean="car2"/>
+	</util:list>
+	
+	<bean id="person4" class="com.zc.cris.collectionProperty.Person">
+		<property name="name" value="哈登"></property>
+		<property name="age" value="29"></property>
+		<property name="cars" ref="cars"></property>
+	</bean>
+	
+	<!-- 通过p命名空间为bean的属性赋值，需要先导入p命名空间，相对于传统的方式更加的简洁 -->
+	<bean id="person5" class="com.zc.cris.collectionProperty.Person" 
+	p:age="12" p:name="库里" p:cars-ref="cars" >
+		
+	</bean>
+	
+	
+	
+
+</beans>

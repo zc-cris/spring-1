@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+<!-- 
+	可以使用bean 的 scope 属性来配置 bean 的作用域
+	singleton：默认值，容器初始化的时候就已经创建bean 实例了，并且在 ioc 容器的整个生命周期内只创建这一个 bean，单例
+	prototype：原型的，即 ioc 容器初始化的时候不创建 bean 的实例，而是在每次请求的时候都创建一个新的 bean 实例并返回（可以运用在 strtus2框架的 action）
+ -->
+<bean id="car" class="com.zc.cris.autowire.Car" scope="prototype">
+	<property name="name" value="玛莎拉蒂"></property>
+	<property name="price">
+		<value>2345678</value>
+	</property>
+</bean>
+
+</beans>

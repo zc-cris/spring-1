@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+<!-- 
+	抽象 bean：bean 的 abstract属性为 true 的 bean，这样的 bean 不能被 ioc 容器实例化，只能作为模板 bean 存在
+	若一个 bean 的class 属性没有被指定，那么该 bean 一定是个 抽象 bean，并且抽象 bean 的 abstract 属性并不会被继承
+ -->
+<bean id="address" p:city="北京" p:province="天安门" abstract="true">
+</bean>
+
+<!-- bean 配置的继承：使用 bean 的 parent 属性指定继承哪个 bean 的配置信息，而且依然可以覆写属性 -->
+<bean id="address1" class="com.zc.cris.autowire.Address" parent="address"></bean>
+<bean id="address2" class="com.zc.cris.autowire.Address" parent="address1" p:city="重庆"></bean>
+
+<bean id="car" class="com.zc.cris.autowire.Car" p:name="法拉利" p:price="2000000.0"></bean>
+
+<!-- bean 之间的依赖 bean 设置：要求在配置person 的时候，必须要有一个关联的 car bean 对象，
+	换句话说，person 这个 bean 依赖于car 这个 bean ，没有 car 这个 bean ，person 这个 bean 无法创建
+ -->
+<bean id="person" class="com.zc.cris.autowire.Person" p:address-ref="address2" p:name="阿呆" depends-on="car" p:car-ref="car"></bean>
+
+
+
+</beans>
