@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="car" class="com.zc.cris.beans.autowire.Car">
+		<property name="name" value="保时捷"></property>
+		<property name="price" value="1234567.0"></property>
+	</bean>
+	<bean id="address" class="com.zc.cris.beans.autowire.Address" p:city="上海" p:province="北京"></bean>
+
+	<!-- 
+		可以使用autowire属性指定自动装配的方式
+		byName 根据bean的名字和当前待装配的bean的setter方法对应的属性名进行自动装配，匹配则装配，不匹配就不装配
+		byType 根据bean的类型和当前bean的属性的类型进行自动装配，若ioc容器有一个以上的类型匹配的bean（即有两个car），则会抛异常
+		很少使用，因为不够灵活，只有在整合第三方框架的时候可能会用到
+	 -->
+	<bean id="person" class="com.zc.cris.beans.autowire.Person" p:name="steve" autowire="byName">
+		
+	</bean>
+
+</beans>

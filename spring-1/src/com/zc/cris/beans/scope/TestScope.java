@@ -17,8 +17,6 @@ class TestScope {
 		System.out.println(bean);
 		bean = applicationContext.getBean("car");
 		System.out.println(bean);
-
-		
 		
 	}
 	

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 创建car这个bean的初始化方法和销毁方法 -->
+	<bean id="car" class="com.zc.cris.beans.lifeCircle.Car" init-method="carInit" destroy-method="carDestroy">
+		<property name="name" value="法拉利"></property>
+	</bean>
+	
+	<!-- 注册bean的后置处理器 
+		实现BeanPostProcessor的接口：
+			1.  Object postProcessBeforeInitialization(Object bean, String beanName)
+					在init-method方法之前调用
+			2. 	Object postProcessAfterInitialization(Object bean, String beanName)
+					在init-method方法之后调用
+				bean：bean实例本身
+				beanName：ioc 容器配置的bean的名字（id）
+				返回值：实际返回给用户的bean~~~~~可以在以上两个方法里面对bean进行处理，设置偷梁换柱！
+	-->
+	<!-- 不需要配置id属性，ioc容器自动识别为BeanPostProcessor -->
+	<bean class="com.zc.cris.beans.lifeCircle.MyCarPostProcess"></bean>
+
+
+</beans>

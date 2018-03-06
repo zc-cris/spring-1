@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- 
+		通过 自定义FactoryBean的实现类来配置bean的实例
+		class：指向FactoryBean的全类名
+		property：配置FactoryBean 的属性
+		
+		实际返回的bean实例其实是FactoryBean 的getObject()方法返回的实例！
+	 -->
+	<bean id="car" class="com.zc.cris.beans.factoryBean.CarFactoryBean">
+		<property name="carName" value="阿斯顿马丁"></property>
+	</bean>
+
+</beans>

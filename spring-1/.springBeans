@@ -8,10 +8,15 @@
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
 		<config>src/applicationContext.xml</config>
-		<config>src/autowire.xml</config>
-		<config>src/Beans-relation.xml</config>
 		<config>src/beans-scope.xml</config>
-		<config>src/beans-properties.xml</config>
+		<config>src/beans-spEL.xml</config>
+		<config>src/beans-autowire.xml</config>
+		<config>src/beans-dataSourceProperties.xml</config>
+		<config>src/beans-relation.xml</config>
+		<config>src/beans-lifeCircle.xml</config>
+		<config>src/beans-factory.xml</config>
+		<config>src/beans-beanFactory.xml</config>
+		<config>src/beans-annotation.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
