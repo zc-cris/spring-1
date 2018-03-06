@@ -18,18 +18,18 @@ class TestAnnotation {
 	void test() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans-annotation.xml");
 		
-		UserService userService= (UserService) context.getBean("userService");
-		System.out.println(userService);
-//		
+//		UserService userService= (UserService) context.getBean("userService");
+//		System.out.println(userService);
+////		
 //		UserDao userDao = (UserDao) context.getBean("userDao");
 //		System.out.println(userDao);
 //		
-//		UserController userController = (UserController) context.getBean("userController");
-//		System.out.println(userController);
 //		
 //		User user = (User) context.getBean("user");
 //		System.out.println(user);
 //		
+		UserController userController = (UserController) context.getBean("userController");
+		System.out.println(userController);
 		
 	}
 }
