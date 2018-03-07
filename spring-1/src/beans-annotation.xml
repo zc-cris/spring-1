@@ -30,7 +30,7 @@
 	 
  	 	<!-- <context:include-filter type="assignable" expression="com.zc.cris.beans.annotation.userdao.UserDao"/> -->
  	 	
- 	 	<context:exclude-filter type="assignable" expression="com.zc.cris.beans.annotation.userdao.UserDao"/>
+ 	 	<!-- <context:exclude-filter type="assignable" expression="com.zc.cris.beans.annotation.userdao.UserDao"/> -->
 	 </context:component-scan>
 	 
 	 

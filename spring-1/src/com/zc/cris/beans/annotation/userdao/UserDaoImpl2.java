@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.zc.cris.beans.annotation.userEntity.User;
 
 @Repository
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl2 implements UserDao {
 
 	@Autowired(required=false)
 	private User user;

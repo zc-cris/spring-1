@@ -24,12 +24,12 @@ class TestAnnotation {
 //		UserDao userDao = (UserDao) context.getBean("userDao");
 //		System.out.println(userDao);
 //		
-//		
 //		User user = (User) context.getBean("user");
 //		System.out.println(user);
 //		
 		UserController userController = (UserController) context.getBean("userController");
 		System.out.println(userController);
+		userController.execute();
 		
 	}
 }

@@ -11,7 +11,7 @@ class TestAutowire {
 	@Test
 	void test() {
 		
-		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("autowire.xml");
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans-autowire.xml");
 		Object bean = applicationContext.getBean("person");
 		System.out.println(bean);
 		
